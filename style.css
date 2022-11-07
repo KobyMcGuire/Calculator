@@ -1,0 +1,33 @@
+body, html {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(48, 46, 46);
+}
+
+.container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgb(129, 125, 125);
+}
+
+.viewer {
+    min-height: 75px;
+    min-width: 25vh;
+    margin-bottom: 50px;
+    background-color: white;
+}
+
+button {
+    font-size: x-large;
+    min-width: 50px;
+}
