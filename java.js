@@ -35,7 +35,22 @@ function operate(operator, a, b) {
 
 }
 
+let viewer = document.querySelector(".viewer");
+function displayNumbers(button) {
+    viewer.innerHTML = `${button.textContent}`;
+}
+
+let buttons = document.querySelectorAll(".button");
+for (const button of buttons) {
+    button.addEventListener("click", function() {
+        displayNumbers(button);
+    })
+}
+
+
+/*
 console.log(operate("+", 2, 3));
 console.log(operate("-", 2, 3));
 console.log(operate("/", 2, 3));
 console.log(operate("*", 2, 3));
+*/
