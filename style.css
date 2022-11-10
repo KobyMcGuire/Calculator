@@ -21,6 +21,9 @@ body {
 }
 
 .viewer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
     min-height: 75px;
     min-width: 25vh;
     margin-bottom: 50px;
