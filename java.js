@@ -41,14 +41,8 @@ function clearViewer() {
     return;
 }
 
+
 function displayNumbers(button) {
-    if (button.id === "operator") {
-        clearViewer();
-        viewer.innerHTML = button.textContent;
-        return;
-    }
-    // if for clear
-    // if for enter
     viewer.innerHTML += `${button.textContent}`;
 }
 
@@ -56,29 +50,24 @@ function displayNumbers(button) {
 let buttons = document.querySelectorAll(".button");
 let viewer = document.querySelector(".viewer");
 let arr = [];
+let firstChain = false;
+
+
 
 for (const button of buttons) {
     button.addEventListener("click", function() {
+        console.log(arr.length);
 
-        //Will clear the viewer after an operator is chosen
+        //Will clear the viewer when a number is pressed after an operator
         if (viewer.innerHTML === "+" || 
             viewer.innerHTML === "-" ||
             viewer.innerHTML === "*" ||
             viewer.innerHTML === "/") {
-                
+                arr.push(viewer.textContent);
                 clearViewer();
         }
 
         //Seperate from above
-        if (button.id === "number") {
-            displayNumbers(button);
-        }
-
-        if (button.id === "operator") {
-            arr.push(parseInt(viewer.innerHTML));
-            arr.push(button.textContent);
-            displayNumbers(button);  
-        }
 
         if (button.id === "equals") {
             arr.push(parseInt(viewer.innerHTML));
@@ -87,19 +76,37 @@ for (const button of buttons) {
             viewer.innerHTML = `${evaluation}`;
         }
 
+        if (button.id === "number") {
+            if (firstChain === true) {
+                clearViewer();
+            }
+            displayNumbers(button);
+        }
+
+        if (button.id === "operator") {
+            arr.push(parseInt(viewer.innerHTML));
+            clearViewer();
+            if (arr.length === 3) {
+                let evaluation = operate(arr[1], arr[0], arr[2]);
+                arr.length = 0;
+                arr.push(evaluation);
+                arr.push(button.textContent);
+                console.log(arr);
+                firstChain = true;
+                viewer.innerHTML = `${evaluation}`;
+                return;  
+            }
+            displayNumbers(button);  
+        }
+ 
         if (button.id === "clear") {
             clearViewer();
             arr = [];
         }
 
         console.log(arr);
+
     })
 }
 
 
-/*
-console.log(operate("+", 2, 3));
-console.log(operate("-", 2, 3));
-console.log(operate("/", 2, 3));
-console.log(operate("*", 2, 3));
-*/
