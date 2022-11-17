@@ -73,12 +73,17 @@ for (const button of buttons) {
             arr.push(parseInt(viewer.innerHTML));
             clearViewer();
             let evaluation = operate(arr[1], arr[0], arr[2]);
+            //Clear array to get ready for another operation
+            arr = [];
+            //Update Viewer
             viewer.innerHTML = `${evaluation}`;
         }
 
         if (button.id === "number") {
             if (firstChain === true) {
                 clearViewer();
+                //Reset First Chain in order to not limit the calculator to only one digit inputs
+                firstChain = false; 
             }
             displayNumbers(button);
         }
